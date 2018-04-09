@@ -7,20 +7,17 @@
 #define AF_0 A0
 #define AF_1 A1
 
-#define PPR 600
+#define PPR 100
 
 #define ENCODER
 
-#define TEST_TIME 5000000 //In microseconds, the total test runtime
+#define MAX_SPEED 1000 //In pulses, NEED TO TUNE
 
-#define SAMPLE_FREQ 0.05 //In microseconds, time per "division"
+const long SAMPLE_TIME = 50000;
 
-#define MAX_SPEED 4 //In pulses, NEED TO TUNE
-
-const long SAMPLE_TIME = 500000;
+const float conversion =  SAMPLE_TIME / 1000000;
 
 volatile long pulses = 0;
-long prevPulses = 0;
 
 double velocity = 0;
 double prevVelocity = 0;
@@ -34,8 +31,8 @@ bool tooFast;
 
 void setup() {
   // put your setup code here, to run once:
-  pinMode(INT_0, INPUT_PULLUP);
-  pinMode(INT_1, INPUT_PULLUP);
+  pinMode(INT_0, INPUT);
+  pinMode(INT_1, INPUT);
   pinMode(BUZZ, OUTPUT); digitalWrite(BUZZ, LOW);
   pinMode(LED_R, OUTPUT); digitalWrite(LED_R, LOW);
   pinMode(LED_G, OUTPUT); digitalWrite(LED_G, LOW);
@@ -47,27 +44,30 @@ void setup() {
 
 void loop() {
   currentTime = micros();
-  if(pulses == 0) {
-    digitalWrite(LED_R, HIGH);
-    digitalWrite(LED_G, LOW);
-    digitalWrite(LED_B, HIGH);
+  //Serial.println("kek");
+  if(velocity == 0) {
+    digitalWrite(LED_R, LOW);
+    digitalWrite(LED_G, HIGH);
+    digitalWrite(LED_B, LOW);
     digitalWrite(BUZZ, LOW);
-  } else if (pulses < MAX_SPEED) {
+  } else if (velocity < MAX_SPEED) {
     digitalWrite(LED_R, LOW);
     digitalWrite(LED_G, LOW);
     digitalWrite(LED_B, HIGH);
     digitalWrite(BUZZ, LOW);
   } else {
-    digitalWrite(LED_R, LOW);
-    digitalWrite(LED_G, HIGH);
-    digitalWrite(LED_B, HIGH);
+    digitalWrite(LED_R, HIGH);
+    digitalWrite(LED_G, LOW);
+    digitalWrite(LED_B, LOW);
     digitalWrite(BUZZ, HIGH);
   }
   if (currentTime - prevTime >= SAMPLE_TIME) {
     updateVars();
-    Serial.print(velocity, 4); Serial.print(", "); Serial.println(acceleration, 4);
+    Serial.println(velocity, 4); //Serial.print(", "); Serial.println(acceleration, 4);
     pulses = 0;
     prevTime = currentTime;
+    //Serial.println(pulses);
+    
   }
   //Serial.print(pulses); Serial.print(", "); Serial.println(prevPulses);
 }
@@ -77,13 +77,12 @@ void encoder() {
 }
 
 void updateVars() {
-  velocity = pulsesToDegrees(pulses) / (SAMPLE_TIME / 10000);
-  acceleration = (velocity - prevVelocity) / (SAMPLE_TIME / 10000);
-  prevPulses = pulses;
+  velocity = 60 * pulsesToDegrees(pulses) / 0.05;
+  acceleration = (velocity - prevVelocity) / 0.05;
   prevVelocity = velocity;
 }
 
 double pulsesToDegrees(int i) {
-  return (double(i) / PPR) * 360;
+  return (double(i) / PPR);
 }
 
