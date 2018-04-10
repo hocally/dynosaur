@@ -63,7 +63,7 @@ void loop() {
   }
   if (currentTime - prevTime >= SAMPLE_TIME) {
     updateVars();
-    Serial.println(velocity, 4); //Serial.print(", "); Serial.println(acceleration, 4);
+    Serial.print(velocity, 4); Serial.print(", "); Serial.println(acceleration, 4);
     pulses = 0;
     prevTime = currentTime;
     //Serial.println(pulses);
