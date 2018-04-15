@@ -1,26 +1,46 @@
 import serial
 
-import time
+import easygui
+
+import datetime
 
 
-class Node:
-    def __init__(self, velocity, acceleration, previous):
-        self.velocity = velocity
-        self.acceleration = acceleration
-        self.previous = previous
-        self.next = None
+class Queue:
+	def __init__(self):
+		self.items = []
 
-    def setNext(self, node):
-        self.next = node
+	def isEmpty(self):
+		return self.items == []
+
+	def enqueue(self, item):
+		self.items.insert(0, item)
+
+	def dequeue(self):
+		return self.items.pop()
+
+	def size(self):
+		return len(self.items)
 
 
-head = Node(None, None, None)
-tail = Node(None, None, head)
+#Program vars
+data = Queue()
+port = '/dev/ttyUSB0'
+ser = serial.Serial(port, 115200)
+running = False
+run = 1
 
-ser = serial.Serial('/dev/tty', 9600) # Establish the connection on a specific port
+#Test vars
+flywheels = [69, 420, 1337]
+testInfo = ["Bike", "Operator"]
 
-for x in range():
-    tail = Node(x, x, tail)
-    tail.previous.setNext(tail)
-
-print(tail.velocity)
+while True:
+	fieldValues = easygui.multenterbox("Please enter the following information about the test", "Dynosaur 1.0", testInfo)
+	flywheel = easygui.choicebox("Please select the flywheel being used for the test. \nUnits are in kg * m²", "Dynosaur 1.0", flywheels)
+	now = datetime.datetime.now()
+	fieldValues[0] = fieldValues[0].replace(" ", "")
+	fieldValues[1] = fieldValues[1].replace(" ", "")
+	filename = fieldValues[0] + "_" + fieldValues[1] + "_" + str(now.month) + "_" + str(now.day) + "_" + str(now.year)
+	path = easygui.diropenbox("Please select the directory to save the test data.", "Dynosaur 1.0", "~")
+	print(filename)
+	print(path)
+	break
