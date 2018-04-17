@@ -4,50 +4,51 @@ import easygui
 import datetime
 import matplotlib.pyplot as plt
 
+X = [590, 540, 740, 130, 810, 300, 320, 230, 470, 620, 770, 250]
+Y = [32, 36, 39, 52, 61, 72, 77, 75, 68, 57, 48, 48]
 
-class Queue:
-	def __init__(self):
-		self.items = []
-
-	def isEmpty(self):
-		return self.items == []
-
-	def enqueue(self, item):
-		self.items.insert(0, item)
-
-	def dequeue(self):
-		return self.items.pop()
-
-	def size(self):
-		return len(self.items)
-
-X = [590,540,740,130,810,300,320,230,470,620,770,250]
-Y = [32,36,39,52,61,72,77,75,68,57,48,48]
-
-plt.scatter(X, Y)
 
 #Program vars
-data = Queue()
 port = '/dev/ttyUSB0'
 #ser = serial.Serial(port, 115200)
-running = False
-run = 1
+logo = "logo.gif"
+testState = 0
+testRun = 1
 
 #Test vars
 flywheels = [69, 420, 1337]
 testInfo = ["Bike", "Operator"]
+testChoices = ["Quit", "Enter test params.", "Calibration mode"]
+testSwitch = {testChoices[0] : -1, testChoices[1] : 1, testChoices[2] : 3}
+runChoices = ["Go to start", "Test same bike", "Test new bike", "Quit"]
+runSwitch = {runChoices[0] : 0, runChoices[1] : 2, runChoices[2] : 1, runChoices[3] : -1}
 
 while True:
-	fieldValues = easygui.multenterbox("Please enter the following information about the test", "Dynosaur 1.0", testInfo)
-	flywheel = easygui.choicebox("Please select the flywheel being used for the test. \nUnits are in kg * m²", "Dynosaur 1.0", flywheels)
-	now = datetime.datetime.now()
-	filename = fieldValues[0].replace(" ", "") + "_" + fieldValues[1].replace(" ", "") + "_" + str(now.month) + "_" + str(now.day) + "_" + str(now.year)
-	path = easygui.diropenbox("Please select the directory to save the test data.", "Dynosaur 1.0", "~")
-	print(filename)
-	print(path)
-	break
+	if testState == 0:
+		reply = easygui.buttonbox("Please select the desired option.", image = logo, choices = testChoices)
+		if reply == logo:
+			testState = 0
+			continue
+		testState = testSwitch[reply]
 
-plt.title(fieldValues[0] + " Torque Curve")
-plt.xlabel("Angular Velocity (RPM)")
-plt.ylabel("Torque N*M")
-plt.show()
+	elif testState == 1:
+		fieldValues = easygui.multenterbox("Please enter the following information about the test", "Dynosaur 1.0", testInfo)
+		flywheel = easygui.choicebox("Please select the flywheel being used for the test. \nUnits are in kg * m²", "Dynosaur 1.0", flywheels)
+		now = datetime.datetime.now()
+		filename = fieldValues[0].replace(" ", "") + "_" + fieldValues[1].replace(" ", "") + "_" + str(now.month) + "_" + str(now.day) + "_" + str(now.year) + "_" + str(testRun)
+		path = easygui.diropenbox("Please select the directory to save the test data.", "Dynosaur 1.0", "~")
+		testState = 2
+
+	elif testState == 2:
+		#run test
+		#view/save results
+		reply = easygui.buttonbox("What now?", choices=runChoices)
+		testState = testSwitch[reply]
+
+	elif testState == 3:
+		#calibration?
+		print("Calibrating dyno")
+		testState = -1
+
+	else:
+		break
