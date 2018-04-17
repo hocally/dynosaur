@@ -18,14 +18,14 @@ testRun = 1
 #Test vars
 flywheels = [69, 420, 1337]
 testInfo = ["Bike", "Operator"]
-testChoices = ["Quit", "Enter test params.", "Calibration mode"]
+testChoices = ["Quit", "Enter test parameters", "Calibration mode"]
 testSwitch = {testChoices[0] : -1, testChoices[1] : 1, testChoices[2] : 3}
 runChoices = ["Go to start", "Test same bike", "Test new bike", "Quit"]
 runSwitch = {runChoices[0] : 0, runChoices[1] : 2, runChoices[2] : 1, runChoices[3] : -1}
 
 while True:
 	if testState == 0:
-		reply = easygui.buttonbox("Please select the desired option.", image = logo, choices = testChoices)
+		reply = easygui.buttonbox("Please select the desired option.", choices = testChoices)
 		if reply == logo:
 			testState = 0
 			continue
