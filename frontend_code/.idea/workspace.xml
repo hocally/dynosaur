@@ -21,8 +21,8 @@
       <file leaf-file-name="DAQ_1_0.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/DAQ_1_0.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="267">
-              <caret line="46" column="9" selection-start-line="46" selection-start-column="9" selection-end-line="46" selection-end-column="9" />
+            <state relative-caret-position="377">
+              <caret line="51" column="45" lean-forward="true" selection-start-line="51" selection-start-column="45" selection-end-line="51" selection-end-column="45" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -55,11 +55,11 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="20" />
-    <option name="y" value="-4" />
+  <component name="ProjectFrameBounds" extendedState="4">
+    <option name="x" value="987" />
+    <option name="y" value="24" />
     <option name="width" value="933" />
-    <option name="height" value="1048" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="false" id="Update" />
@@ -151,11 +151,18 @@
       <option name="project" value="LOCAL" />
       <updated>1523998536261</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="I don't really know what I did, still works though">
+      <created>1524097667281</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1524097667281</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="54" y="-11" width="1867" height="1092" extended-state="6" />
+    <frame x="987" y="24" width="933" height="1056" extended-state="4" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.25" />
@@ -163,7 +170,7 @@
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.32991803" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.101434425" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3048523" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -272,8 +279,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/DAQ_1_0.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="46" column="9" selection-start-line="46" selection-start-column="9" selection-end-line="46" selection-end-column="9" />
+        <state relative-caret-position="377">
+          <caret line="51" column="45" lean-forward="true" selection-start-line="51" selection-start-column="45" selection-end-line="51" selection-end-column="45" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
