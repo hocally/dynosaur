@@ -54,10 +54,11 @@ while True:
 				accelerationData = float(serialData[serialData.find(" ") + 1 : serialData.find("\\") - 1])
 				velocity.append(velocityData)
 				acceleration.append(accelerationData)
-				print(len(velocity), len(acceleration))
+				#print(len(velocity), len(acceleration))
 
 				plt.plot(velocity, acceleration)
-				plt.plot()
+				plt.show()
+
 		reply = easygui.buttonbox("What now?", choices=runChoices)
 		testState = runSwitch[reply]
 
