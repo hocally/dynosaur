@@ -51,7 +51,8 @@ while True:
 		testRun += 1
 		# Wait for start command
 		go = easygui.boolbox("Begin test?", "Dynosaur 1.0")
-		# if go:
+		print("Lets see if this breaks git")
+		#if go:
 		#	while True:
 		# Log data as it comes in
 		# Periodically update display
@@ -73,4 +74,3 @@ while True:
 		print("Exiting")
 		break
 
-# def runTest():
