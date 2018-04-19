@@ -24,10 +24,6 @@ testSwitch = {testChoices[0]: -1, testChoices[1]: 1, testChoices[2]: 3}
 runChoices = ["Go to start", "Test same bike", "Test new bike", "Quit"]
 runSwitch = {runChoices[0]: 0, runChoices[1]: 2, runChoices[2]: 1, runChoices[3]: -1}
 
-velocityX = []
-accelerationY = []
-
-def grapher():
 
 while True:
 	if testState == 0:
@@ -59,6 +55,9 @@ while True:
 				velocity.append(velocityData)
 				acceleration.append(accelerationData)
 				print(len(velocity), len(acceleration))
+
+				plt.plot(velocity, acceleration)
+				plt.plot()
 		reply = easygui.buttonbox("What now?", choices=runChoices)
 		testState = runSwitch[reply]
 
