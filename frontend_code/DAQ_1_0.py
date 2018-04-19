@@ -5,13 +5,13 @@ import datetime
 import matplotlib.pyplot as plt
 import time
 
-velocity = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-acceleration = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+velocity = []
+acceleration = []
 
 #Program vars
 title = "Dynosaur 1.0"
 port = '/dev/ttyUSB0'
-#ser = serial.Serial(port, 115200)
+ser = serial.Serial(port, 115200)
 logo = "logo.gif"
 testState = 0
 testRun = 0
@@ -44,17 +44,14 @@ while True:
 		testRun += 1
 		#Wait for start command
 		go = easygui.boolbox("Begin test?", "Dynosaur 1.0")
-		print("Lets see if this breaks git")
-		#if go:
-		#	while True:
-				#Log data as it comes in
-
-				#Periodically update display
-
-				#Terminate test at RPM or time or button?
-
-				#View/save results
-
+		if go:
+			while True:
+				serialData = str(ser.readline())
+				velocityData = float(serialData[serialData.find("'") + 1 : serialData.find(",") - 1])
+				accelerationData = float(serialData[serialData.find(" ") + 1 : serialData.find("\\") - 1])
+				velocity.append(velocityData)
+				acceleration.append(accelerationData)
+				print(len(velocity), len(acceleration))
 		reply = easygui.buttonbox("What now?", choices=runChoices)
 		testState = runSwitch[reply]
 
