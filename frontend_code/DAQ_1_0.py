@@ -17,8 +17,9 @@ testState = 0
 testRun = 0
 
 # Test vars
+fieldValues = []
 flywheels = [69, 420, 1337]
-testInfo = ["Bike", "Operator"]
+testInfo = ["Bike", "Operator", "Terminal speed"]
 testChoices = ["Quit", "Enter test parameters", "Calibration mode"]
 testSwitch = {testChoices[0]: -1, testChoices[1]: 1, testChoices[2]: 3}
 runChoices = ["Go to start", "Test same bike", "Test new bike", "Quit"]
@@ -48,17 +49,16 @@ while True:
 		# Wait for start command
 		go = easygui.boolbox("Begin test?", "Dynosaur 1.0")
 		if go:
+			plt.show()
 			while True:
 				serialData = str(ser.readline())
+				#print(serialData)
 				velocityData = float(serialData[serialData.find("'") + 1 : serialData.find(",") - 1])
 				accelerationData = float(serialData[serialData.find(" ") + 1 : serialData.find("\\") - 1])
 				velocity.append(velocityData)
 				acceleration.append(accelerationData)
-				#print(len(velocity), len(acceleration))
-
-				plt.plot(velocity, acceleration)
-				plt.show()
-
+				if velocityData >= float(fieldValues[2]):
+					break
 		reply = easygui.buttonbox("What now?", choices=runChoices)
 		testState = runSwitch[reply]
 
